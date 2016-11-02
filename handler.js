@@ -17,12 +17,16 @@ module.exports.hello = (event, context, callback) => {
 
 const ec2 = new AWS.EC2();
 
+// Returns an array of all instances.
 const describeInstances = () =>
-  ec2.describeInstances().promise();
+  ec2.describeInstances().promise().then(data => data.Reservations);
+
+// Returns an array of invalid instances.
+const filterInvalidInstances = instances => console.log(JSON.stringify(instances, null, 2));
 
 module.exports.terminator = (event, context, callback) => {
   Promise.resolve(event)
     .then(describeInstances)
-    .then(data => console.log(JSON.stringify(data, null, 2)))
+    .then(filterInvalidInstances)
     .catch(callback);
 };
