@@ -25,6 +25,7 @@ provider:
     - Effect: Allow
       Action:
         - ec2:DescribeInstances
+        - ec2:TerminateInstances
       Resource: "*"
 
 # you can overwrite defaults here

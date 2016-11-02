@@ -24,10 +24,15 @@ const report = (invalidInstances) => {
   return invalidInstances;
 };
 
+// Terminate instances.
+const terminateInstances = instances =>
+  ec2.terminateInstances({ InstanceIds: instances.map(i => i.InstanceId) }).promise();
+
 module.exports.terminator = (event, context, callback) => {
   Promise.resolve(event)
     .then(describeInstances)
     .then(filterInvalidInstances)
     .then(report)
+    .then(terminateInstances)
     .catch(callback);
 };
