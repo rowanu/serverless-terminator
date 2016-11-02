@@ -20,6 +20,7 @@ service: terminator
 provider:
   name: aws
   runtime: nodejs4.3
+  cfLogs: true # Prevent issues later. See v1.1 release notes.
   iamRoleStatements:
     - Effect: Allow
       Action:
