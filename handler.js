@@ -21,7 +21,7 @@ const ec2 = new AWS.EC2();
 const describeInstances = () =>
   ec2.describeInstances().promise()
     .then(data => data.Reservations.map(r => r.Instances)) // Flatten instances
-    .then(instances => instances.reduce((a, b) => a.concat(b));
+    .then(instances => instances.reduce((a, b) => a.concat(b), []));
 
 // Returns an array of invalid instances.
 const filterInvalidInstances = instances => instances;
