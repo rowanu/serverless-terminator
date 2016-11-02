@@ -20,6 +20,11 @@ service: terminator
 provider:
   name: aws
   runtime: nodejs4.3
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - ec2:DescribeInstances
+      Resource: "*"
 
 # you can overwrite defaults here
 #  stage: dev
