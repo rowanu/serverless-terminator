@@ -56,6 +56,9 @@ provider:
 functions:
   terminator:
     handler: handler.terminator
+    memorySize: 512
+    events:
+      - schedule: rate(5 minutes)
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
