@@ -31,7 +31,7 @@ const terminateInstances = (instanceIds) => {
   if (instanceIds.length) ec2.terminateInstances({ InstanceIds: instanceIds }).promise();
 };
 
-module.exports.terminator = (event, context, callback) => {
+module.exports.terminator = (event, context, callback) =>
   Promise.resolve(event)
     .then(describeInstances)
     .then(filterInvalidInstances)
@@ -39,4 +39,3 @@ module.exports.terminator = (event, context, callback) => {
     .then(report)
     .then(terminateInstances)
     .catch(callback);
-};
