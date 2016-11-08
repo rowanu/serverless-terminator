@@ -9,13 +9,12 @@ const describeInstances = () =>
     .then(instances => instances.reduce((a, b) => a.concat(b), []));
 
 // Returns true if instance.tags includes a Key with 'Name'.
-const instanceHasNoNameTag = instance => instance.Tags.filter(t => t.Key === 'Name').length === 0;
+const instanceHasNoNameTag = instance =>
+  instance.Tags.filter(t => t.Key === 'Name').length === 0;
 
 // Returns an array of invalid instances.
-const filterInvalidInstances = (instances) => {
-  const instancesMissingNameTag = instances.filter(instanceHasNoNameTag);
-  return instancesMissingNameTag;
-};
+const filterInvalidInstances = instances =>
+  instances.filter(instanceHasNoNameTag);
 
 // Get just the instance ids.
 const getInstanceIds = instances => instances.map(i => i.InstanceId);
