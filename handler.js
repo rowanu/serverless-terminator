@@ -8,7 +8,7 @@ const describeInstances = () =>
     .then(data => data.Reservations.map(r => r.Instances))
     .then(instances => instances.reduce((a, b) => a.concat(b), []));
 
-// Returns true if instance.tags includes a Key with 'Name'.
+// Returns true if instance.tags has no Key with 'Name'.
 const instanceHasNoNameTag = instance =>
   instance.Tags.filter(t => t.Key === 'Name').length === 0;
 
