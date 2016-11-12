@@ -6,7 +6,11 @@ const ec2 = new AWS.EC2();
 const describeInstances = () =>
   ec2.describeInstances({ Filters: [{ Name: 'instance-state-name', Values: ['running'] }] }).promise()
     .then(data => data.Reservations.map(r => r.Instances))
-    .then(instances => instances.reduce((a, b) => a.concat(b), []));
+    .then(instances => instances.reduce((a, b) => a.concat(b), []))
+    .then((instances) => {
+      console.log(`Found ${instances.length} instances`);
+      return instances;
+    });
 
 // Returns true if instance.tags has no Key with 'Name'.
 const instanceHasNoNameTag = instance =>
